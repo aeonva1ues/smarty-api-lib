@@ -147,7 +147,7 @@ class SyncContent(object):
             self.seasons = {}
             self.episodes = {}
             if self.is_updated(video):
-                continue
+                return True
 
             video_files = video['files']
             is_success = all(self.update_videofile(vf, video['id']) for vf in video_files)
@@ -157,7 +157,8 @@ class SyncContent(object):
                     print('Video id={} updated successfully'.format(video['id']))
                 else:
                     print('Video id={} update failed'.format(video['id']))
-                return True
+            return True
+
         return False
 
     def load_data(self):
